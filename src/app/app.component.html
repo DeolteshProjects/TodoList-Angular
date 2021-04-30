@@ -1,0 +1,61 @@
+<div class="container" role="main">
+  <div class="row justify-content-center mt-5">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header text-center">
+          {{ title }}
+        </div>
+        <div class="card-body">
+          <div class="col-12"></div>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <div class="input-group-append col-12">
+                <input class="form-control" [(ngModel)]="newItem" ng-trim="true">
+                <button class="btn btn-sm btn-outline-primary" (click)="addItem()" (keydown.enter)="addItem()">Добавить</button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="(todoList.length === 0)">
+            <ngb-alert type="warning" [animation]="false" [dismissible]="false">
+              В данный момент в вашем списке нет заданий
+            </ngb-alert>
+          </div>
+          <div *ngIf="(todoList.length > 0)">
+            <div *ngFor="let task of todoList, index as i">
+              <div class="alert alert-light p-1 mb-0" (mouseenter)="view_table = i" (mouseleave)="view_table = -1">
+                <div class="col-12 row">
+                  <div class="col-10">
+                    <div *ngIf="task.edit">
+                      <input class="form-control" [(ngModel)]="task.title" ng-trim="true">
+                    </div>
+                    <div *ngIf="!task.edit" class="form-check">
+                      <input type="checkbox" class="custom-check form-check-input" [(ngModel)]="task.status"
+                        (click)="reverseStatus(i)">
+                      <label class="form-check-label">{{ task.title }}</label>
+                    </div>
+                  </div>
+                  <div class="col-2 p-0">
+                    <div *ngIf="(i === view_table)" class="btn btn-group p-0 mb-0">
+                      <button *ngIf="!task.edit" class="btn btn-outline-warning btn-sm" (click)="task.edit = !task.edit"
+                        title="Редактировать">
+                        <fa-icon [icon]="faPen"></fa-icon>
+                      </button>
+                      <button *ngIf="task.edit" class="btn btn-outline-primary btn-sm"
+                        (click)="task.edit = !task.edit" title="Сохранить">
+                        <fa-icon [icon]="faSave"></fa-icon>
+                      </button>
+                      <button class="btn btn-outline-danger btn-sm" title="Удалить" (click)="removeItem(i)">
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="mb-0"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
