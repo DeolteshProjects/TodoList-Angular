@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { faTrash, faPen, faSave } from '@fortawesome/free-solid-svg-icons';
 
 interface ListItem {
   title: string;
   status: boolean;
-  edit: boolean;
 }
 @Component({
   selector: 'app-root',
@@ -12,32 +10,29 @@ interface ListItem {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  faTrash = faTrash;
-  faPen = faPen;
-  faSave = faSave;
   title = "Список задач";
   todoList: ListItem[] = [];
   newItem = "";
   view_table = -1;
-  
+  errorMessage = "";
+
 
   addItem() {
     console.log(this.newItem);
     if (this.newItem.trim().length > 0) {
-      let add = {
-        title: this.newItem,
-        status: false,
-        edit: false,
-      } as ListItem;
-      this.todoList.unshift(add);
-      this.newItem = "";
+      if (!this.findItem()) {
+        let add = {
+          title: this.newItem,
+          status: false
+        } as ListItem;
+        this.todoList.unshift(add);
+        this.newItem = "";
+      } else {
+        this.errorMessage = "Задача уже присутствует в списке."
+      }
     }
   };
-  reverseStatus(tIndex: number) {
-    let item = this.todoList[tIndex];
-    item.status = !item.status;
-    this.todoList[tIndex] = item;
-  };
+
   resortArray() {
     this.todoList.sort((prev, next) => ((prev.status) ? 1 : -1) - ((next.status) ? 1 : -1));
   };
@@ -55,6 +50,13 @@ export class AppComponent {
       this.todoList = JSON.parse(data);
     }
     console.log(this.todoList);
+  };
+  findItem() {
+    let result = this.todoList.filter((row) => row.title == this.newItem);
+    return (result.length > 0);
+  };
+  closeAlert() {
+    this.errorMessage = "";
   };
   ngOnInit() {
     this.getFromLocal();

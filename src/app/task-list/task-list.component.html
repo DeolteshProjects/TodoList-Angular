@@ -1,0 +1,27 @@
+<div class="alert alert-light p-1 mb-0"  style="min-height: 45px;" >
+  <div class="col-12 row">
+    <div class="col-10">
+      <div *ngIf="edit">
+        <input class="form-control" [(ngModel)]="task.title" ng-trim="true">
+      </div>
+      <div *ngIf="!edit" class="form-check">
+        <input type="checkbox" class="custom-check form-check-input" [(ngModel)]="task.status"
+          (click)="reverseStatus()">
+        <label class="form-check-label">{{ task.title }}</label>
+      </div>
+    </div>
+    <div class="col-2 p-0">
+      <div *ngIf="view_item" class="btn btn-group p-0 mb-0">
+        <button *ngIf="!edit" class="btn btn-outline-warning btn-sm" (click)="edit = !edit" title="Редактировать">
+          <fa-icon [icon]="faPen"></fa-icon>
+        </button>
+        <button *ngIf="edit" class="btn btn-outline-primary btn-sm" (click)="edit = !edit" title="Сохранить">
+          <fa-icon [icon]="faSave"></fa-icon>
+        </button>
+        <button *ngIf="!edit" class="btn btn-danger btn-sm" style="opacity: 0.8;" title="Удалить" (click)="removeItem.emit()">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
