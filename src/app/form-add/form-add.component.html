@@ -1,0 +1,13 @@
+<div class="form-group">
+    <div class="input-group mb-3">
+        <ngb-alert class="col-12 text-left" *ngIf="(errorMessage.length > 0)" type="danger" (closed)="closeAlert.emit()"
+            [animation]="true">
+            {{ errorMessage }}
+        </ngb-alert>
+        <mat-form-field class="example-full-width col-12">
+            <mat-label>{{ placeholder }}</mat-label>
+            <input matInput data-placeholder="{{ placeholder }}" [(ngModel)]="newItem" ng-trim="true"
+                (keyup.enter)="addingItem()">
+        </mat-form-field>
+    </div>
+</div>

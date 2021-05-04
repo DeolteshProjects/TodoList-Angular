@@ -1,15 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { faTrash, faPen, faSave } from '@fortawesome/free-solid-svg-icons';
-
-interface ListItem {
-    title: string;
-    status: boolean;
-}
+import { ListItem } from '../models/list';
 
 @Component({
     selector: 'task-list',
     templateUrl: './task-list.component.html',
-    // styleUrls: ['./task-list.components.css']
 })
 export class TaskListComponent {
     @Input() task!: ListItem;

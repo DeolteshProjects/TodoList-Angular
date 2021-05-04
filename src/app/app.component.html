@@ -1,35 +1,24 @@
-<div class="container" role="main">
-  <div class="row justify-content-center mt-5 mb-5">
-    <div class="col-6">
-      <div class="card">
-        <div class="card-header text-center">
+<div class="app">
+  <div class="container" role="main">
+    <div class="app-content">
+      <div class="text-dark text-center p-3 logo">
+        <i>
           {{ title }}
+        </i>
+      </div>
+      <div class="">
+        <div class="col-12"></div>
+        <form-add [errorMessage]="errorMessage" (addItem)="addItem($event)" (closeAlert)="closeAlert()"></form-add>
+        <div *ngIf="(todoList.length === 0)">
+          <ngb-alert type="warning" [animation]="false" [dismissible]="false">
+            В данный момент в вашем списке нет заданий
+          </ngb-alert>
         </div>
-        <div class="card-body">
-          <div class="col-12"></div>
-          <div class="form-group">
-            <div class="input-group mb-3">
-              <ngb-alert class="col-12 text-left" *ngIf="(errorMessage.length > 0)" type="danger"
-                (closed)="closeAlert()" [animation]="true">
-                {{ errorMessage }}
-              </ngb-alert>
-              <div class="input-group-append col-12">
-                <input class="form-control" [(ngModel)]="newItem" ng-trim="true" (keyup.enter)="addItem()">
-                <!-- <button class="btn btn-sm btn-outline-primary" (click)="addItem()"
-                  [disabled]="(newItem.length === 0)">Добавить</button> -->
-              </div>
-            </div>
-          </div>
-          <div *ngIf="(todoList.length === 0)">
-            <ngb-alert type="warning" [animation]="false" [dismissible]="false">
-              В данный момент в вашем списке нет заданий
-            </ngb-alert>
-          </div>
-          <div *ngIf="(todoList.length > 0)">
-            <div style="display:block; max-height: 500px; overflow-y: auto;">
-              <div *ngFor="let task of todoList, index as i">
+        <div *ngIf="(todoList.length > 0)">
+          <div style="display:block; max-height: 500px; overflow-y: auto;">
+            <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let task of todoList, index as i" cdkDrag>
                 <task-list [task]='task' (removeItem)="removeItem(i)"></task-list>
-                <hr *ngIf="(todoList.length != (i+1))" />
               </div>
             </div>
           </div>

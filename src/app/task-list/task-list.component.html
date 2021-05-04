@@ -1,16 +1,19 @@
-<div class="alert alert-light p-1 mb-0"  style="min-height: 45px;" >
-  <div class="col-12 row">
-    <div class="col-10">
-      <div *ngIf="edit">
-        <input class="form-control" [(ngModel)]="task.title" ng-trim="true">
-      </div>
-      <div *ngIf="!edit" class="form-check">
-        <input type="checkbox" class="custom-check form-check-input" [(ngModel)]="task.status"
-          (click)="reverseStatus()">
-        <label class="form-check-label">{{ task.title }}</label>
+<div class="ToDo__items">
+  <div class="BaseTodoItem TodoItem" draggable="false">
+    <div class="BaseTodoItem__checkbox">
+      <div *ngIf="!edit">
+        <input type="checkbox" data-testid="completeCheckbox" class="checkbox" [(ngModel)]="task.status" (click)="reverseStatus()">
       </div>
     </div>
-    <div class="col-2 p-0">
+    <div class="BaseTodoItem__content">
+      <div *ngIf="edit">
+        <input class="form-control" [(ngModel)]="task.title" ng-trim="true" (keyup.enter)="edit = !edit">
+      </div>
+      <div *ngIf="!edit">
+        <div data-testid="contentEditTrigger" class="break-all"> {{ task.title }} </div>
+      </div>
+    </div>
+    <div class="BaseTodoItem__actions">
       <div *ngIf="view_item" class="btn btn-group p-0 mb-0">
         <button *ngIf="!edit" class="btn btn-outline-warning btn-sm" (click)="edit = !edit" title="Редактировать">
           <fa-icon [icon]="faPen"></fa-icon>
@@ -18,10 +21,12 @@
         <button *ngIf="edit" class="btn btn-outline-primary btn-sm" (click)="edit = !edit" title="Сохранить">
           <fa-icon [icon]="faSave"></fa-icon>
         </button>
-        <button *ngIf="!edit" class="btn btn-danger btn-sm" style="opacity: 0.8;" title="Удалить" (click)="removeItem.emit()">
+        <button *ngIf="!edit" class="btn btn-danger btn-sm" style="opacity: 0.8;" title="Удалить"
+          (click)="removeItem.emit()">
           <fa-icon [icon]="faTrash"></fa-icon>
         </button>
       </div>
+      <div class="TodoItem__reorderHandle"><i class="fa fa-bars"></i></div>
     </div>
   </div>
 </div>

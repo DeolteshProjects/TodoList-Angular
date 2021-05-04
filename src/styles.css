@@ -1,1 +1,82 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.app {
+  color: #2c3e50;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#2ebf91),
+    to(#8360c3)
+  );
+  background: linear-gradient(180deg, #2ebf91, #8360c3);
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.app-content {
+  width: 60%;
+}
+.app-content {
+  background: #ededed;
+  padding: 1rem;
+  padding-top: 1rem;
+  padding-top: 0;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 30px -5px #2c3e50;
+  box-shadow: 0 0 30px -5px #2c3e50;
+  margin: 1rem auto;
+  min-height: 300px;
+}
+.logo {
+    position: relative;
+    top: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.ToDo__items {
+  margin-top: 0.5rem;
+}
+.BaseTodoItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  background: #fff;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.BaseTodoItem__content {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 0 1rem;
+}
+
+.BaseTodoItem__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
